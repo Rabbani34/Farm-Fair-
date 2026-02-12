@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FarmFair Marketplace</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <style>
+        body {
+            background: #f4fff8;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .market-header {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .market-header h1 {
+            color: #0a8f3c;
+            font-size: 36px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 40px;
+        }
+
+        .crop-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .crop-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0px 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .crop-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #15803d;
+        }
+
+        .price {
+            font-size: 20px;
+            color: #16a34a;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .location {
+            color: gray;
+            margin-top: 5px;
+        }
+
+        .buy-btn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg,#22c55e,#16a34a);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .buy-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="market-header">
+    <h1>🌾 FarmFair Marketplace</h1>
+    <p>Buy directly from farmers — Fresh & Fair</p>
+</div>
+
+<div class="grid">
+
+{% for crop in crops %}
+
+    <div class="crop-card">
+        <div class="crop-title">{{ crop.crop_name }}</div>
+
+        <div class="price">₹{{ crop.price }} / kg</div>
+
+        <p>Quantity: {{ crop.quantity }} kg</p>
+
+        <div class="location">📍 {{ crop.location }}</div>
+
+        <form method="POST" action="/place-order">
+            <input type="hidden" name="crop_id" value="{{ crop.id }}">
+            <button class="buy-btn">Buy Now</button>
+        </form>
+    </div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

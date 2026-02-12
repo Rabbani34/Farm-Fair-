@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { background:#f3fdf7; font-family:'Segoe UI'; }
+.admin-header {
+background:linear-gradient(135deg,#16a34a,#22c55e);
+padding:25px;
+color:white;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+}
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:40px;
+}
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0px 10px 25px rgba(0,0,0,0.1);
+}
+.counter{
+font-size:42px;
+font-weight:bold;
+color:#16a34a;
+margin-top:10px;
+}
+.table-box{
+background:white;
+margin:30px;
+padding:30px;
+border-radius:15px;
+box-shadow:0px 10px 25px rgba(0,0,0,0.1);
+overflow-x:auto;
+}
+table{
+width:100%;
+border-collapse:collapse;
+}
+th,td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+button{
+padding:6px 12px;
+border:none;
+background:#16a34a;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+select,input{
+padding:5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="admin-header">
+👑 FarmFair Owner Control Panel
+</div>
+
+<div class="stats">
+
+<div class="card">
+<h2>Total Users</h2>
+<div class="counter">{{ users }}</div>
+</div>
+
+<div class="card">
+<h2>Total Crops</h2>
+<div class="counter">{{ crops_count }}</div>
+</div>
+
+<div class="card">
+<h2>Total Orders</h2>
+<div class="counter">{{ orders }}</div>
+</div>
+
+</div>
+
+<div class="table-box">
+<h2>Manage Crops</h2>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Farmer</th>
+<th>Crop</th>
+<th>Quantity</th>
+<th>Price</th>
+<th>Status</th>
+<th>Update</th>
+</tr>
+
+{% for crop in crops %}
+<tr>
+<form action="/admin/update-crop/{{ crop.id }}" method="POST">
+<td>{{ crop.id }}</td>
+<td>{{ crop.farmer_phone }}</td>
+<td>{{ crop.crop_name }}</td>
+<td>{{ crop.quantity }}</td>
+<td>
+<input type="number" name="price" value="{{ crop.price }}">
+</td>
+<td>
+<select name="status">
+<option value="Available" {% if crop.status=="Available" %}selected{% endif %}>Available</option>
+<option value="Sold" {% if crop.status=="Sold" %}selected{% endif %}>Sold</option>
+</select>
+</td>
+<td>
+<button type="submit">Save</button>
+</td>
+</form>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

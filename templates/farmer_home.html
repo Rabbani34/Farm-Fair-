@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Farmer Dashboard</title>
+<link rel="stylesheet" href="/static/css/main.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard fade-in">
+
+<div class="sidebar">
+<h2>🌾 Farmer</h2>
+<a href="#">Dashboard</a>
+<a href="/sell">Sell Crops</a>
+<a href="#">Orders</a>
+<a href="#">Payments</a>
+<a href="/logout">Logout</a>
+</div>
+
+<div class="main-content">
+
+<div class="topbar">
+<h3>Welcome {{ session['phone'] }} 👋</h3>
+<p>Status: Active</p>
+</div>
+
+<div class="card-grid">
+
+<div class="card chart-card">
+<h3>Weekly Sales (₹)</h3>
+<canvas id="salesChart"></canvas>
+</div>
+
+<div class="card">
+<p>Total Sales</p>
+<div class="counter" data-target="{{ total_sales }}">0</div>
+</div>
+
+<div class="card">
+<p>Orders Completed</p>
+<div class="counter" data-target="{{ orders_completed }}">0</div>
+</div>
+
+<div class="card">
+<p>Active Listings</p>
+<div class="counter" data-target="{{ active_listings }}">0</div>
+</div>
+
+<div class="card">
+<p>Wallet Balance</p>
+<div class="counter" data-target="{{ wallet_balance }}">0</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+
+// Smooth Counter Animation
+document.querySelectorAll(".counter").forEach(counter => {
+
+let target = +counter.dataset.target;
+let count = 0;
+
+let increment = target / 80;
+
+function update(){
+if(count < target){
+count += increment;
+counter.innerText = Math.ceil(count);
+requestAnimationFrame(update);
+}else{
+counter.innerText = target;
+}
+}
+update();
+});
+
+// Real Chart
+const ctx = document.getElementById('salesChart');
+
+new Chart(ctx, {
+type: 'line',
+data: {
+labels: {{ labels | tojson }},
+datasets: [{
+label: 'Sales ₹',
+data: {{ values | tojson }},
+borderColor: '#16a34a',
+backgroundColor: 'rgba(22,163,74,0.2)',
+borderWidth: 3,
+fill: true,
+tension: 0.4
+}]
+},
+options: {
+responsive: true,
+plugins: {
+legend: { display: false }
+}
+}
+});
+
+</script>
+
+</body>
+</html>

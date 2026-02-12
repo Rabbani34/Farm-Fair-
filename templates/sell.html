@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sell Crops</title>
+<link rel="stylesheet" href="/static/css/main.css">
+
+<style>
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
+}
+
+.veg-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+gap:25px;
+margin-bottom:40px;
+}
+
+.veg-card{
+background:white;
+border-radius:20px;
+padding:20px;
+text-align:center;
+cursor:pointer;
+transition:all 0.3s ease;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.veg-card:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.veg-card.selected{
+border:2px solid #16a34a;
+box-shadow:0 0 15px rgba(22,163,74,0.4);
+}
+
+.veg-icon{
+width:70px;
+height:70px;
+margin:auto;
+border-radius:50%;
+background:#dcfce7;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:bold;
+color:#16a34a;
+margin-bottom:10px;
+}
+
+.veg-card h4{
+font-size:14px;
+margin:0;
+}
+
+.form-box{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+margin-bottom:40px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px 20px;
+background:#16a34a;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#15803d;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:12px;
+border-bottom:1px solid #eee;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🌾 Choose Vegetable to Sell</h2>
+
+<div class="veg-grid">
+
+{% for veg in vegetables %}
+<div class="veg-card" onclick="selectVeg(this, '{{ veg }}')">
+<div class="veg-icon">{{ veg[0] }}</div>
+<h4>{{ veg }}</h4>
+</div>
+{% endfor %}
+
+</div>
+
+<div class="form-box">
+
+<h3>Add Crop Listing</h3>
+
+<form method="POST" action="/add-crop">
+
+<input type="hidden" id="selectedVeg" name="crop" required>
+
+<label>Quantity (Kg)</label>
+<input type="number" name="quantity" required>
+
+<label>Price per Kg (₹)</label>
+<input type="number" name="price" required>
+
+<label>Selling Location</label>
+<input type="text" name="location" placeholder="Village / Market Name" required>
+
+<button type="submit">List Crop</button>
+
+</form>
+
+</div>
+
+<h3>Your Current Listings</h3>
+
+<table>
+<tr>
+<th>Vegetable</th>
+<th>Quantity</th>
+<th>Price</th>
+<th>Location</th>
+<th>Status</th>
+<th>Remove</th>
+</tr>
+
+{% for crop in crops %}
+<tr>
+<td>{{ crop.crop_name }}</td>
+<td>{{ crop.quantity }} Kg</td>
+<td>₹ {{ crop.price }}</td>
+<td>{{ crop.location }}</td>
+<td>{{ crop.status }}</td>
+<td>
+<a href="/delete-crop/{{ crop.id }}">
+<button style="background:red;">Delete</button>
+</a>
+</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+<script>
+
+function selectVeg(element, name){
+
+document.querySelectorAll(".veg-card").forEach(card=>{
+card.classList.remove("selected");
+});
+
+element.classList.add("selected");
+
+document.getElementById("selectedVeg").value = name;
+
+}
+
+</script>
+
+</body>
+</html>

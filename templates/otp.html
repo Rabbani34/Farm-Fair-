@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>OTP Verification</title>
+
+<link rel="stylesheet" href="/static/css/main.css">
+
+</head>
+<body>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<div class="otp-container">
+
+<h2>OTP Verification</h2>
+
+<p>OTP sent to <b>{{ phone }}</b></p>
+
+{% if error %}
+<p class="error-msg">{{ error }}</p>
+{% endif %}
+
+<form action="/verify-otp" method="POST">
+
+<input type="hidden" name="phone" value="{{ phone }}">
+
+<input id="otpInput" type="text" name="otp" placeholder="Enter OTP" maxlength="4" required>
+
+<button type="submit" class="login-btn">
+Verify & Login
+</button>
+
+</form>
+
+<p>
+Resend OTP in <span id="timer">30</span> sec
+</p>
+
+<button id="resendBtn">
+Resend OTP
+</button>
+
+</div>
+
+
+<script>
+
+let phone = "{{ phone }}";
+let otpValue = "{{ otp }}";
+
+let timerEl = document.getElementById("timer");
+let resendBtn = document.getElementById("resendBtn");
+
+let timeLeft = 30;
+
+// show OTP popup
+if(otpValue !== ""){
+    showToast("Your OTP: " + otpValue);
+}
+
+// disable resend initially
+resendBtn.disabled = true;
+
+// start timer
+let timer = setInterval(() => {
+
+    timeLeft--;
+    timerEl.innerText = timeLeft;
+
+    if(timeLeft <= 0){
+        clearInterval(timer);
+        resendBtn.disabled = false;
+        timerEl.innerText = "0";
+    }
+
+},1000);
+
+
+// resend click
+resendBtn.onclick = function(){
+
+fetch("/resend-otp", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({ phone: phone })
+})
+.then(res => res.json())
+.then(data => {
+
+    showToast("New OTP: " + data.otp);
+
+    resendBtn.disabled = true;
+    timeLeft = 30;
+    timerEl.innerText = timeLeft;
+
+    timer = setInterval(() => {
+
+        timeLeft--;
+        timerEl.innerText = timeLeft;
+
+        if(timeLeft <= 0){
+            clearInterval(timer);
+            resendBtn.disabled = false;
+        }
+
+    },1000);
+
+});
+
+};
+
+
+// toast function
+function showToast(msg){
+
+let toast = document.getElementById("toast");
+
+toast.innerText = msg;
+toast.classList.add("show");
+
+setTimeout(()=>{
+toast.classList.remove("show");
+},4000);
+
+}
+
+</script>
+
+</body>
+</html>

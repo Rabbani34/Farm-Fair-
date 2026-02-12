@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Marketplace</title>
+<link rel="stylesheet" href="/static/css/main.css">
+
+<style>
+
+.market-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:25px;
+padding:30px;
+}
+
+.product-card{
+background:white;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+padding:20px;
+transition:0.3s;
+}
+
+.product-card:hover{
+transform:scale(1.05);
+}
+
+.product-icon{
+font-size:60px;
+text-align:center;
+}
+
+button{
+background:#16a34a;
+color:white;
+padding:8px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2 style="padding:20px;">🛒 Fresh Marketplace</h2>
+
+<div class="market-grid">
+
+{% for crop in crops %}
+<div class="product-card">
+
+<div class="product-icon">🥕</div>
+
+<h3>{{ crop.crop_name }}</h3>
+
+<p>Price: ₹{{ crop.price }} / Kg</p>
+<p>Available: {{ crop.quantity }} Kg</p>
+<p>Location: {{ crop.location }}</p>
+
+<form method="POST" action="/add-to-cart">
+<input type="hidden" name="crop_id" value="{{ crop.id }}">
+<input type="number" name="quantity" placeholder="Kg" required>
+<button type="submit">Add to Cart</button>
+</form>
+
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+<div class="topbar">Payment Status</div>
+
+<div class="content page">
+
+<div class="card" style="text-align:center;">
+<h2 style="color:#0bbf53;">₹97,500</h2>
+<p>Payment Secured</p>
+</div>
+
+<div class="card">
+
+<b>Transaction Timeline</b><br><br>
+
+<div class="stepper">
+
+<div class="step">
+<div class="dot">✔</div>
+Payment Confirmed
+</div>
+
+<div class="step">
+<div class="dot">🚚</div>
+Delivery In Progress
+</div>
+
+<div class="step">
+<div class="dot">₹</div>
+Payment Release
+</div>
+
+</div>
+
+</div>
+
+<button class="btn" onclick="payNow()">Pay Now</button>
+
+<script>
+function payNow(){
+
+fetch("/make_payment",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({amount:"97500"})
+})
+
+.then(res=>res.json())
+.then(data=>{
+alert("Payment Successful")
+window.location.href="/farmer-home"
+})
+
+}
+</script>
+
+</button>
+
+</div>
+
+</div>
+
+</body>
+</html>

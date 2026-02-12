@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Buyer Dashboard</title>
+<link rel="stylesheet" href="/static/css/main.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="dashboard fade-in">
+
+<div class="sidebar">
+<h2>🛒 Buyer</h2>
+
+<a href="#">Marketplace</a>
+<a href="#">My Orders</a>
+<a href="#">Payments</a>
+<a href="/logout">Logout</a>
+
+</div>
+
+<div class="main-content">
+
+<div class="topbar">
+<h3>Fresh Market 🥬</h3>
+</div>
+
+<div class="card-grid">
+
+<div class="card" style="margin-top:25px;">
+<h3>Orders This Week</h3>
+<canvas id="orderChart"></canvas>
+</div>
+
+<div class="card">
+<p>Available Products</p>
+<h2>{{ available_products }}</h2>
+</div>
+
+<div class="card">
+<p>Orders Placed</p>
+<h2>{{ orders_count }}</h2>
+</div>
+
+<div class="card">
+<p>Total Spend</p>
+<h2>{{ total_spend }}</h2>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document.querySelectorAll(".counter").forEach(counter => {
+
+let target = +counter.dataset.target;
+let count = 0;
+
+let inc = target / 60;
+
+function animate(){
+if(count < target){
+count += inc;
+counter.innerText = Math.ceil(count);
+requestAnimationFrame(animate);
+}else{
+counter.innerText = target;
+}
+}
+
+animate();
+
+});
+
+// Buyer Orders Chart
+
+const ctx2 = document.getElementById('orderChart');
+
+new Chart(ctx2, {
+type: 'bar',
+data: {
+labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+datasets: [{
+label: 'Orders',
+data: [5,8,4,9,7,11,6],
+borderWidth: 1
+}]
+},
+options: {
+responsive: true,
+plugins:{
+legend:{display:false}
+}
+}
+});
+
+</script>
+
+</body>
+</html>

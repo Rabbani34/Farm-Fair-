@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FarmFair Login</title>
+<link rel="stylesheet" href="/static/css/main.css">
+<style>
+
+body{
+    background: linear-gradient(120deg,#e8fff1,#f7fffb);
+    font-family: Arial, sans-serif;
+}
+
+.login-box{
+    width: 360px;
+    background: white;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.1);
+}
+
+.login-box h2{
+    text-align: center;
+    margin-bottom: 20px;
+    color:#0a7a3d;
+}
+
+.form-group{
+    margin-bottom: 16px;
+}
+
+label{
+    font-size: 14px;
+    font-weight: 600;
+    display:block;
+    margin-bottom:6px;
+}
+
+input, select{
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border:1px solid #ddd;
+    font-size: 15px;
+}
+
+input:focus, select:focus{
+    outline:none;
+    border-color:#12b76a;
+}
+
+.btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#12b76a;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#0fa25b;
+}
+
+.otp-box{
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>FarmFair Login</h2>
+
+<form method="POST">
+
+<!-- ROLE -->
+<div class="form-group">
+<label>Select Role</label>
+<select name="role" required>
+    <option value="">Choose Role</option>
+    <option value="Farmer">Farmer</option>
+    <option value="Buyer">Buyer</option>
+    <option value="Admin">Admin</option>
+</select>
+</div>
+
+<!-- MOBILE -->
+<div class="form-group">
+<label>Mobile Number</label>
+<input type="text" name="phone" placeholder="Enter Mobile Number" required>
+</div>
+
+<!-- SEND OTP -->
+<button class="btn" type="submit">
+Send OTP
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

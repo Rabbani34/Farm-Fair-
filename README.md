@@ -50,3 +50,91 @@ Payments are automatically credited to farmers.
 ---
 
 ## 📂 Project Structure
+
+FarmFair/ │ ├── app.py ├── model.py ├── farmfair.db ├── requirements.txt │ ├── templates/ │   ├── login.html │   ├── otp.html │   ├── buyer_home.html │   ├── farmer_home.html │   ├── marketplace.html │   ├── sell.html │   ├── admin.html │ └── static/ ├── css/ └── images/
+
+---
+
+## ⚙️ Installation Guide
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Rabbani34/FarmFair.git
+cd FarmFair
+
+2️⃣ Create Virtual Environment (Recommended)
+
+python -m venv venv
+
+Activate:
+
+venv\Scripts\activate
+
+3️⃣ Install Dependencies
+
+pip install -r requirements.txt
+
+If requirements file is missing, install manually:
+pip install flask flask_sqlalchemy flask_cors
+
+4️⃣ Run the Application
+python app.py
+
+App will run at:
+http://127.0.0.1:10000
+
+🧪 How It Works
+Login using mobile number + role
+OTP is generated in console
+Enter OTP
+Role-based redirection:
+Farmer → /farmer-home
+Buyer → /buyer-home
+Admin → /admin-home
+💰 Payment Flow
+Buyer adds items to cart
+Buyer checks out using wallet
+Buyer wallet is deducted
+Farmer wallet is credited
+Crop stock is reduced
+Order is created
+🗄 Database Models
+User
+id
+phone
+role
+wallet
+Crop
+id
+farmer_phone
+crop_name
+quantity
+price
+location
+status
+Order
+id
+buyer_phone
+farmer_phone
+crop_id
+quantity
+total_price
+status
+🔒 Security Notes
+OTP is console-generated (for demo purposes)
+Not production-ready authentication
+SQLite used for development only
+
+📈 Future Improvements
+Real SMS OTP integration
+Razorpay / Stripe payment integration
+Image upload for crops
+Order tracking system
+Rating & review system
+REST API version
+Deployment on Render / Railway / AWS
+
+⭐ License
+This project is for educational use.
+

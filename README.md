@@ -92,6 +92,7 @@ Role-based redirection:
 Farmer → /farmer-home
 Buyer → /buyer-home
 Admin → /admin-home
+
 💰 Payment Flow
 Buyer adds items to cart
 Buyer checks out using wallet
@@ -99,12 +100,14 @@ Buyer wallet is deducted
 Farmer wallet is credited
 Crop stock is reduced
 Order is created
+
 🗄 Database Models
 User
 id
 phone
 role
 wallet
+
 Crop
 id
 farmer_phone
@@ -113,6 +116,7 @@ quantity
 price
 location
 status
+
 Order
 id
 buyer_phone
@@ -121,6 +125,7 @@ crop_id
 quantity
 total_price
 status
+
 🔒 Security Notes
 OTP is console-generated (for demo purposes)
 Not production-ready authentication

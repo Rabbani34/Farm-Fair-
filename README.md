@@ -1,6 +1,6 @@
-# 🌾 FarmFair – Smart Farmer Marketplace
+#  FarmFair – Smart Farmer Marketplace
 
-FarmFair is a role-based web application built using **Flask + SQLAlchemy** that connects Farmers and Buyers in a marketplace-style platform (similar to Amazon for crops).
+FarmFair is a role-based web application built using **Flask + SQLAlchemy** that connects Farmers and Buyers in a marketplace-style platform .
 
 Farmers can list crops, set price & location.
 Buyers can browse products, add to cart, and pay using wallet.
@@ -8,36 +8,36 @@ Payments are automatically credited to farmers.
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 👨‍🌾 Farmer Portal
+###  Farmer Portal
 - Add crops with quantity, price & location
 - Delete crop listings
 - View current listings
 - Wallet balance system
 - Auto credit when buyer purchases
 
-### 🛒 Buyer Portal
+###  Buyer Portal
 - Dynamic marketplace (Amazon-style product cards)
 - Add to cart system
 - Wallet-based payment
 - Order creation & stock deduction
 - Auto credit to farmer wallet
 
-### 👨‍💼 Admin Portal
+###  Admin Portal
 - View total users
 - View total crops
 - View total orders
 - Update crop price & status
 
-### 🔐 Authentication
+###  Authentication
 - OTP-based login
 - Role-based access (Farmer / Buyer / Admin)
 - Session management
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - Python 3.x
 - Flask
@@ -49,21 +49,21 @@ Payments are automatically credited to farmers.
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 FarmFair/ │ ├── app.py ├── model.py ├── farmfair.db ├── requirements.txt │ ├── templates/ │   ├── login.html │   ├── otp.html │   ├── buyer_home.html │   ├── farmer_home.html │   ├── marketplace.html │   ├── sell.html │   ├── admin.html │ └── static/ ├── css/ └── images/
 
 ---
 
-## ⚙️ Installation Guide
+##  Installation Guide
 
-### 1️⃣ Clone the Repository
+### 1️ Clone the Repository
 
 ```bash
 git clone https://github.com/Rabbani34/FarmFair.git
 cd FarmFair
 
-2️⃣ Create Virtual Environment (Recommended)
+2️ Create Virtual Environment (Recommended)
 
 python -m venv venv
 
@@ -71,20 +71,20 @@ Activate:
 
 venv\Scripts\activate
 
-3️⃣ Install Dependencies
+3️ Install Dependencies
 
 pip install -r requirements.txt
 
 If requirements file is missing, install manually:
 pip install flask flask_sqlalchemy flask_cors
 
-4️⃣ Run the Application
+ Run the Application
 python app.py
 
 App will run at:
 http://127.0.0.1:10000
 
-🧪 How It Works
+ How It Works
 Login using mobile number + role
 OTP is generated in console
 Enter OTP
@@ -93,7 +93,7 @@ Farmer → /farmer-home
 Buyer → /buyer-home
 Admin → /admin-home
 
-💰 Payment Flow
+ Payment Flow
 Buyer adds items to cart
 Buyer checks out using wallet
 Buyer wallet is deducted
@@ -101,7 +101,7 @@ Farmer wallet is credited
 Crop stock is reduced
 Order is created
 
-🗄 Database Models
+ Database Models
 User
 id
 phone
@@ -126,12 +126,12 @@ quantity
 total_price
 status
 
-🔒 Security Notes
+ Security Notes
 OTP is console-generated (for demo purposes)
 Not production-ready authentication
 SQLite used for development only
 
-📈 Future Improvements
+ Future Improvements
 Real SMS OTP integration
 Razorpay / Stripe payment integration
 Image upload for crops
@@ -140,6 +140,6 @@ Rating & review system
 REST API version
 Deployment on Render / Railway / AWS
 
-⭐ License
+ License
 This project is for educational use.
 

@@ -51,7 +51,7 @@ Payments are automatically credited to farmers.
 
 ##  Project Structure
 
-FarmFair/ │ ├── app.py ├── model.py ├── farmfair.db ├── requirements.txt │ ├── templates/ │   ├── login.html │   ├── otp.html │   ├── buyer_home.html │   ├── farmer_home.html │   ├── marketplace.html │   ├── sell.html │   ├── admin.html │ └── static/ ├── css/ └── images/
+FarmFair---app.py--- model.py--- farmfair.db--- requirements.txt--- templates---/ login.html--- otp.html--- buyer_home.html--- farmer_home.html--- marketplace.html--- sell.html--- admin.html--- static/---css/ └─--- images/
 
 ---
 

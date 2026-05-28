@@ -1,144 +1,121 @@
-#  FarmFair – Smart Farmer Marketplace
+<div align="center">
 
-FarmFair is a role-based web application built using **Flask + SQLAlchemy** that connects Farmers and Buyers in a marketplace-style platform .
+<img src="https://capsule-render.vercel.app/api?type=venom&color=0:0f1f0f,50:0a2e0a,100:0d1f0d&height=220&section=header&text=FarmFair%20%E2%80%94%20Smart%20Agriculture%20Marketplace&fontSize=34&fontColor=ffffff&fontAlignY=42&desc=Role-Based%20Platform%20%E2%80%A2%20OTP%20Auth%20%E2%80%A2%20Sales%20Workflow%20%E2%80%A2%20Analytics%20Dashboard&descAlignY=62&descSize=14&descColor=86efac&animation=fadeIn" width="100%"/>
 
-Farmers can list crops, set price & location.
-Buyers can browse products, add to cart, and pay using wallet.
-Payments are automatically credited to farmers.
+<br/>
 
----
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white&labelColor=0f1f0f)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white&labelColor=0f1f0f)](https://flask.palletsprojects.com)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white&labelColor=0f1f0f)](https://sqlite.org)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black&labelColor=0f1f0f)](https://javascript.info)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white&labelColor=0f1f0f)](https://getbootstrap.com)
 
-##  Features
+<br/>
 
-###  Farmer Portal
-- Add crops with quantity, price & location
-- Delete crop listings
-- View current listings
-- Wallet balance system
-- Auto credit when buyer purchases
+> **A full-stack web marketplace that directly connects farmers and buyers — with role-based portals, OTP authentication, a complete crop sales workflow, and an admin analytics dashboard.**
 
-###  Buyer Portal
-- Dynamic marketplace (Amazon-style product cards)
-- Add to cart system
-- Wallet-based payment
-- Order creation & stock deduction
-- Auto credit to farmer wallet
-
-###  Admin Portal
-- View total users
-- View total crops
-- View total orders
-- Update crop price & status
-
-###  Authentication
-- OTP-based login
-- Role-based access (Farmer / Buyer / Admin)
-- Session management
+</div>
 
 ---
 
-##  Tech Stack
+## 👥 User Roles
 
-- Python 3.x
-- Flask
-- Flask-SQLAlchemy
-- SQLite
-- HTML, CSS
-- Jinja2
-- Flask-CORS
+<div align="center">
 
----
+| Role | Capabilities |
+|---|---|
+| 🌾 **Farmer** | List crops · Set prices · Manage inventory · View orders |
+| 🛒 **Buyer** | Browse listings · Place orders · Track purchases · Rate sellers |
+| 🛡️ **Admin** | Full platform control · User management · Analytics · Dispute resolution |
 
-##  Project Structure
-
-FarmFair---app.py--- model.py--- farmfair.db--- requirements.txt--- templates---/ login.html--- otp.html--- buyer_home.html--- farmer_home.html--- marketplace.html--- sell.html--- admin.html--- static/---css/ └─--- images/
+</div>
 
 ---
 
-##  Installation Guide
+## ✨ Features
 
-### 1️ Clone the Repository
+- 🔐 **OTP-based authentication** — secure one-time password login for all user types
+- 🌾 **Crop listing system** — farmers can add, edit, and manage produce listings
+- 🛒 **Complete sales workflow** — browsing → cart → order → payment simulation → confirmation
+- 💳 **Payment simulation** — integrated mock payment gateway for end-to-end flow testing
+- 📊 **Admin analytics dashboard** — animated statistics, chart-based insights, and marketplace KPIs
+- 🔒 **Secure session management** — role-based access control throughout
+- 📱 **Responsive design** — Bootstrap-powered UI across all screen sizes
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **Backend** | Python · Flask · REST APIs |
+| **Database** | SQLite · Relational schema design |
+| **Frontend** | HTML5 · CSS3 · JavaScript · Bootstrap |
+| **Auth** | OTP system · Flask Sessions |
+| **Data Viz** | Chart.js · Animated statistics |
+
+---
+
+## 🚀 Running Locally
 
 ```bash
-git clone https://github.com/Rabbani34/FarmFair.git
-cd FarmFair
+# 1. Clone the repository
+git clone https://github.com/Rabbani34/Farm-Fair-.git
+cd Farm-Fair-
 
-2️ Create Virtual Environment (Recommended)
-
+# 2. Create virtual environment
 python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
 
-Activate:
-
-venv\Scripts\activate
-
-3️ Install Dependencies
-
+# 3. Install dependencies
 pip install -r requirements.txt
 
-If requirements file is missing, install manually:
-pip install flask flask_sqlalchemy flask_cors
+# 4. Initialise the database
+python init_db.py
 
- Run the Application
-python app.py
+# 5. Run the app
+flask run
 
-App will run at:
-http://127.0.0.1:10000
+# 6. Open in browser
+# http://localhost:5000
+```
 
- How It Works
-Login using mobile number + role
-OTP is generated in console
-Enter OTP
-Role-based redirection:
-Farmer → /farmer-home
-Buyer → /buyer-home
-Admin → /admin-home
+---
 
- Payment Flow
-Buyer adds items to cart
-Buyer checks out using wallet
-Buyer wallet is deducted
-Farmer wallet is credited
-Crop stock is reduced
-Order is created
+## 📁 Project Structure
 
- Database Models
-User
-id
-phone
-role
-wallet
+```
+Farm-Fair-/
+│
+├── app.py                  # Flask app + route registration
+├── auth/
+│   ├── otp.py              # OTP generation & verification
+│   └── routes.py           # Login / register routes
+├── farmer/
+│   └── routes.py           # Crop listing & management
+├── buyer/
+│   └── routes.py           # Browse, cart & orders
+├── admin/
+│   ├── routes.py           # Admin panel
+│   └── analytics.py        # Dashboard statistics
+├── database/
+│   ├── schema.sql           # DB schema
+│   └── models.py
+├── static/                 # CSS · JS · images
+├── templates/              # Jinja2 HTML templates
+├── requirements.txt
+└── README.md
+```
 
-Crop
-id
-farmer_phone
-crop_name
-quantity
-price
-location
-status
+---
 
-Order
-id
-buyer_phone
-farmer_phone
-crop_id
-quantity
-total_price
-status
+## 👨‍💻 Author
 
- Security Notes
-OTP is console-generated (for demo purposes)
-Not production-ready authentication
-SQLite used for development only
+**Mohammed Rabbani**
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rabbani-mohammed-57653b333/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Rabbani34)
+[![Portfolio](https://img.shields.io/badge/Portfolio-7c3aed?style=flat-square&logo=vercel&logoColor=white)](https://portfolio-sigma-seven-x81lwlz28v.vercel.app/?_vercel_share=49IHQNbb2vXxh0Dx10qyqqvCWZpu7VYo)
 
- Future Improvements
-Real SMS OTP integration
-Razorpay / Stripe payment integration
-Image upload for crops
-Order tracking system
-Rating & review system
-REST API version
-Deployment on Render / Railway / AWS
-
- License
-This project is for educational use.
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f1f0f,100:0a2e0a&height=100&section=footer&animation=fadeIn" width="100%"/>
+</div>
